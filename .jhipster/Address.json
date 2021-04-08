@@ -24,10 +24,11 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "customer",
-      "otherEntityRelationshipName": "firstName",
-      "relationshipName": "customer"
+      "otherEntityRelationshipName": "address",
+      "relationshipName": "customer",
+      "otherEntityField": "firstName"
     }
   ],
   "entityTableName": "address",

@@ -31,22 +31,10 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "category",
-      "relationshipName": "welcome"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "category",
-      "otherEntityRelationshipName": "category",
-      "relationshipName": "welcome"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "category",
-      "otherEntityRelationshipName": "welcome",
-      "relationshipName": "category"
+      "relationshipName": "product"
     }
   ],
   "entityTableName": "category",

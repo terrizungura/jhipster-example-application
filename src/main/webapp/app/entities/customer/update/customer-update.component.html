@@ -42,6 +42,34 @@
           >
           <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
         </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.customer.address" for="field_address">Address</label>
+          <select class="form-control" id="field_address" data-cy="address" name="address" formControlName="address">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="addressOption.id === editForm.get('address')!.value?.id ? editForm.get('address')!.value : addressOption"
+              *ngFor="let addressOption of addressesSharedCollection; trackBy: trackAddressById"
+            >
+              {{ addressOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.customer.wishList" for="field_wishList"
+            >Wish List</label
+          >
+          <select class="form-control" id="field_wishList" data-cy="wishList" name="wishList" formControlName="wishList">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="wishListOption.id === editForm.get('wishList')!.value?.id ? editForm.get('wishList')!.value : wishListOption"
+              *ngFor="let wishListOption of wishListsSharedCollection; trackBy: trackWishListById"
+            >
+              {{ wishListOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

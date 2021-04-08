@@ -30,6 +30,18 @@
         <dd>
           <span>{{ customer.telephone }}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.customer.address">Address</span></dt>
+        <dd>
+          <div *ngIf="customer.address">
+            <a [routerLink]="['/address', customer.address?.id, 'view']">{{ customer.address?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.customer.wishList">Wish List</span></dt>
+        <dd>
+          <div *ngIf="customer.wishList">
+            <a [routerLink]="['/wish-list', customer.wishList?.id, 'view']">{{ customer.wishList?.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

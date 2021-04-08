@@ -3,12 +3,10 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { IAddress, Address } from '../address.model';
 import { AddressService } from '../service/address.service';
-import { ICustomer } from 'app/entities/customer/customer.model';
-import { CustomerService } from 'app/entities/customer/service/customer.service';
 
 @Component({
   selector: 'jhi-address-update',
@@ -17,8 +15,6 @@ import { CustomerService } from 'app/entities/customer/service/customer.service'
 export class AddressUpdateComponent implements OnInit {
   isSaving = false;
 
-  customersSharedCollection: ICustomer[] = [];
-
   editForm = this.fb.group({
     id: [],
     address1: [],
@@ -26,21 +22,13 @@ export class AddressUpdateComponent implements OnInit {
     city: [],
     postcode: [],
     coutnry: [],
-    customer: [],
   });
 
-  constructor(
-    protected addressService: AddressService,
-    protected customerService: CustomerService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+  constructor(protected addressService: AddressService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ address }) => {
       this.updateForm(address);
-
-      this.loadRelationshipsOptions();
     });
   }
 
@@ -56,10 +44,6 @@ export class AddressUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.addressService.create(address));
     }
-  }
-
-  trackCustomerById(index: number, item: ICustomer): number {
-    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IAddress>>): void {
@@ -89,25 +73,7 @@ export class AddressUpdateComponent implements OnInit {
       city: address.city,
       postcode: address.postcode,
       coutnry: address.coutnry,
-      customer: address.customer,
     });
-
-    this.customersSharedCollection = this.customerService.addCustomerToCollectionIfMissing(
-      this.customersSharedCollection,
-      address.customer
-    );
-  }
-
-  protected loadRelationshipsOptions(): void {
-    this.customerService
-      .query()
-      .pipe(map((res: HttpResponse<ICustomer[]>) => res.body ?? []))
-      .pipe(
-        map((customers: ICustomer[]) =>
-          this.customerService.addCustomerToCollectionIfMissing(customers, this.editForm.get('customer')!.value)
-        )
-      )
-      .subscribe((customers: ICustomer[]) => (this.customersSharedCollection = customers));
   }
 
   protected createFromForm(): IAddress {
@@ -119,7 +85,6 @@ export class AddressUpdateComponent implements OnInit {
       city: this.editForm.get(['city'])!.value,
       postcode: this.editForm.get(['postcode'])!.value,
       coutnry: this.editForm.get(['coutnry'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
     };
   }
 }

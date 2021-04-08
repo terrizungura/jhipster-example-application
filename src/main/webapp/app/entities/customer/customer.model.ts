@@ -7,8 +7,8 @@ export interface ICustomer {
   lastNAme?: string | null;
   email?: string | null;
   telephone?: string | null;
-  firstNames?: IAddress[] | null;
-  firstNames?: IWishList[] | null;
+  address?: IAddress | null;
+  wishList?: IWishList | null;
 }
 
 export class Customer implements ICustomer {
@@ -18,8 +18,8 @@ export class Customer implements ICustomer {
     public lastNAme?: string | null,
     public email?: string | null,
     public telephone?: string | null,
-    public firstNames?: IAddress[] | null,
-    public firstNames?: IWishList[] | null
+    public address?: IAddress | null,
+    public wishList?: IWishList | null
   ) {}
 }
 

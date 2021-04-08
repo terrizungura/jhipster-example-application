@@ -10,9 +10,7 @@ export interface ICategory {
   dateAdded?: dayjs.Dayjs | null;
   dateModified?: dayjs.Dayjs | null;
   status?: CategoryStatus | null;
-  welcomes?: IProduct[] | null;
-  welcomes?: ICategory[] | null;
-  category?: ICategory | null;
+  product?: IProduct | null;
 }
 
 export class Category implements ICategory {
@@ -24,9 +22,7 @@ export class Category implements ICategory {
     public dateAdded?: dayjs.Dayjs | null,
     public dateModified?: dayjs.Dayjs | null,
     public status?: CategoryStatus | null,
-    public welcomes?: IProduct[] | null,
-    public welcomes?: ICategory[] | null,
-    public category?: ICategory | null
+    public product?: IProduct | null
   ) {}
 }
 

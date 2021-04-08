@@ -49,7 +49,7 @@ describe('Category e2e test', () => {
       categoryUpdatePage.setDateAddedInput('2000-12-31'),
       categoryUpdatePage.setDateModifiedInput('2000-12-31'),
       categoryUpdatePage.statusSelectLastOption(),
-      categoryUpdatePage.categorySelectLastOption(),
+      categoryUpdatePage.productSelectLastOption(),
     ]);
 
     expect(await categoryUpdatePage.getWelcomeInput()).to.eq('welcome', 'Expected Welcome value to be equals to welcome');

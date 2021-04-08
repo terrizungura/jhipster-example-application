@@ -2,6 +2,8 @@ package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,9 +37,10 @@ public class Address implements Serializable {
     @Column(name = "coutnry")
     private String coutnry;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "firstNames", "firstNames" }, allowSetters = true)
-    private Customer customer;
+    @OneToMany(mappedBy = "address")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "address", "wishList" }, allowSetters = true)
+    private Set<Customer> customers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -118,17 +121,35 @@ public class Address implements Serializable {
         this.coutnry = coutnry;
     }
 
-    public Customer getCustomer() {
-        return this.customer;
+    public Set<Customer> getCustomers() {
+        return this.customers;
     }
 
-    public Address customer(Customer customer) {
-        this.setCustomer(customer);
+    public Address customers(Set<Customer> customers) {
+        this.setCustomers(customers);
         return this;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public Address addCustomer(Customer customer) {
+        this.customers.add(customer);
+        customer.setAddress(this);
+        return this;
+    }
+
+    public Address removeCustomer(Customer customer) {
+        this.customers.remove(customer);
+        customer.setAddress(null);
+        return this;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        if (this.customers != null) {
+            this.customers.forEach(i -> i.setAddress(null));
+        }
+        if (customers != null) {
+            customers.forEach(i -> i.setAddress(this));
+        }
+        this.customers = customers;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

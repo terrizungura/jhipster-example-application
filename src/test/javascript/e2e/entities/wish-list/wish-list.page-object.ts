@@ -33,7 +33,7 @@ export class WishListUpdatePage {
   titleInput = element(by.id('field_title'));
   restrictedInput = element(by.id('field_restricted'));
 
-  customerSelect = element(by.id('field_customer'));
+  productSelect = element(by.id('field_product'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -59,20 +59,20 @@ export class WishListUpdatePage {
     return this.restrictedInput;
   }
 
-  async customerSelectLastOption(): Promise<void> {
-    await this.customerSelect.all(by.tagName('option')).last().click();
+  async productSelectLastOption(): Promise<void> {
+    await this.productSelect.all(by.tagName('option')).last().click();
   }
 
-  async customerSelectOption(option: string): Promise<void> {
-    await this.customerSelect.sendKeys(option);
+  async productSelectOption(option: string): Promise<void> {
+    await this.productSelect.sendKeys(option);
   }
 
-  getCustomerSelect(): ElementFinder {
-    return this.customerSelect;
+  getProductSelect(): ElementFinder {
+    return this.productSelect;
   }
 
-  async getCustomerSelectedOption(): Promise<string> {
-    return await this.customerSelect.element(by.css('option:checked')).getText();
+  async getProductSelectedOption(): Promise<string> {
+    return await this.productSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

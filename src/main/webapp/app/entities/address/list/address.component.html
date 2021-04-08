@@ -38,7 +38,6 @@
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.address.city">City</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.address.postcode">Postcode</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.address.coutnry">Coutnry</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.address.customer">Customer</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -52,11 +51,6 @@
           <td>{{ address.city }}</td>
           <td>{{ address.postcode }}</td>
           <td>{{ address.coutnry }}</td>
-          <td>
-            <div *ngIf="address.customer">
-              <a [routerLink]="['/customer', address.customer?.id, 'view']">{{ address.customer?.id }}</a>
-            </div>
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

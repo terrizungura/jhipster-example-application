@@ -48,7 +48,6 @@ describe('Address e2e test', () => {
       addressUpdatePage.setCityInput('city'),
       addressUpdatePage.setPostcodeInput('postcode'),
       addressUpdatePage.setCoutnryInput('coutnry'),
-      addressUpdatePage.customerSelectLastOption(),
     ]);
 
     expect(await addressUpdatePage.getAddress1Input()).to.eq('address1', 'Expected Address1 value to be equals to address1');

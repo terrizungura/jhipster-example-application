@@ -47,21 +47,6 @@
           <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.address.coutnry" for="field_coutnry">Coutnry</label>
           <input type="text" class="form-control" name="coutnry" id="field_coutnry" data-cy="coutnry" formControlName="coutnry" />
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.address.customer" for="field_customer"
-            >Customer</label
-          >
-          <select class="form-control" id="field_customer" data-cy="customer" name="customer" formControlName="customer">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
-              *ngFor="let customerOption of customersSharedCollection; trackBy: trackCustomerById"
-            >
-              {{ customerOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

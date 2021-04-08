@@ -47,6 +47,8 @@ describe('Customer e2e test', () => {
       customerUpdatePage.setLastNAmeInput('lastNAme'),
       customerUpdatePage.setEmailInput('email'),
       customerUpdatePage.setTelephoneInput('telephone'),
+      customerUpdatePage.addressSelectLastOption(),
+      customerUpdatePage.wishListSelectLastOption(),
     ]);
 
     expect(await customerUpdatePage.getFirstNameInput()).to.eq('firstName', 'Expected FirstName value to be equals to firstName');

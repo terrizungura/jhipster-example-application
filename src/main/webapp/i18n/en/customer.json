@@ -22,8 +22,8 @@
       "lastNAme": "Last N Ame",
       "email": "Email",
       "telephone": "Telephone",
-      "firstName": "First Name",
-      "firstName": "First Name"
+      "address": "Address",
+      "wishList": "Wish List"
     }
   }
 }
