@@ -42,10 +42,10 @@ coutnry String
 }
 
 relationship OneToMany {
-  Customer{firstName} to Address,
-  Customer{firstName} to WishList,
-  WishList{title} to Product,
-  Category{welcome} to Product,
-  Category{welcome} to Category
+  Address{Customer(firstName)} to Customer,
+  WishList{Customer(firstName)} to Customer,
+  Product{WishList(title)} to Product,
+  Product{Category(welcome)} to Product,
+  Category{Category(welcome)} to Category
 }
     
