@@ -13,15 +13,16 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "product",
+      "otherEntityName": "customer",
       "otherEntityRelationshipName": "wishList",
-      "relationshipName": "title"
+      "relationshipName": "customer",
+      "otherEntityField": "firstName"
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "customer",
-      "otherEntityRelationshipName": "firstName",
-      "relationshipName": "customer"
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "wishList",
+      "relationshipName": "product"
     }
   ],
   "entityTableName": "wish_list",

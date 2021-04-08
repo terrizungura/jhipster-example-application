@@ -29,16 +29,18 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "wishList",
-      "otherEntityRelationshipName": "title",
-      "relationshipName": "wishList"
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "wishList",
+      "otherEntityField": "title"
     },
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "category",
-      "otherEntityRelationshipName": "welcome",
-      "relationshipName": "category"
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "category",
+      "otherEntityField": "welcome"
     }
   ],
   "entityTableName": "product",

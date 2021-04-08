@@ -37,6 +37,8 @@
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.customer.lastNAme">Last N Ame</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.customer.email">Email</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.customer.telephone">Telephone</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.customer.address">Address</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.customer.wishList">Wish List</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -49,6 +51,16 @@
           <td>{{ customer.lastNAme }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.telephone }}</td>
+          <td>
+            <div *ngIf="customer.address">
+              <a [routerLink]="['/address', customer.address?.id, 'view']">{{ customer.address?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="customer.wishList">
+              <a [routerLink]="['/wish-list', customer.wishList?.id, 'view']">{{ customer.wishList?.id }}</a>
+            </div>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

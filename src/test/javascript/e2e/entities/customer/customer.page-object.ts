@@ -35,6 +35,9 @@ export class CustomerUpdatePage {
   emailInput = element(by.id('field_email'));
   telephoneInput = element(by.id('field_telephone'));
 
+  addressSelect = element(by.id('field_address'));
+  wishListSelect = element(by.id('field_wishList'));
+
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
@@ -77,6 +80,38 @@ export class CustomerUpdatePage {
 
   async getTelephoneInput(): Promise<string> {
     return await this.telephoneInput.getAttribute('value');
+  }
+
+  async addressSelectLastOption(): Promise<void> {
+    await this.addressSelect.all(by.tagName('option')).last().click();
+  }
+
+  async addressSelectOption(option: string): Promise<void> {
+    await this.addressSelect.sendKeys(option);
+  }
+
+  getAddressSelect(): ElementFinder {
+    return this.addressSelect;
+  }
+
+  async getAddressSelectedOption(): Promise<string> {
+    return await this.addressSelect.element(by.css('option:checked')).getText();
+  }
+
+  async wishListSelectLastOption(): Promise<void> {
+    await this.wishListSelect.all(by.tagName('option')).last().click();
+  }
+
+  async wishListSelectOption(option: string): Promise<void> {
+    await this.wishListSelect.sendKeys(option);
+  }
+
+  getWishListSelect(): ElementFinder {
+    return this.wishListSelect;
+  }
+
+  async getWishListSelectedOption(): Promise<string> {
+    return await this.wishListSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

@@ -7,8 +7,8 @@ import { finalize, map } from 'rxjs/operators';
 
 import { IWishList, WishList } from '../wish-list.model';
 import { WishListService } from '../service/wish-list.service';
-import { ICustomer } from 'app/entities/customer/customer.model';
-import { CustomerService } from 'app/entities/customer/service/customer.service';
+import { IProduct } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
 
 @Component({
   selector: 'jhi-wish-list-update',
@@ -17,18 +17,18 @@ import { CustomerService } from 'app/entities/customer/service/customer.service'
 export class WishListUpdateComponent implements OnInit {
   isSaving = false;
 
-  customersSharedCollection: ICustomer[] = [];
+  productsSharedCollection: IProduct[] = [];
 
   editForm = this.fb.group({
     id: [],
     title: [],
     restricted: [],
-    customer: [],
+    product: [],
   });
 
   constructor(
     protected wishListService: WishListService,
-    protected customerService: CustomerService,
+    protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -55,7 +55,7 @@ export class WishListUpdateComponent implements OnInit {
     }
   }
 
-  trackCustomerById(index: number, item: ICustomer): number {
+  trackProductById(index: number, item: IProduct): number {
     return item.id!;
   }
 
@@ -83,25 +83,20 @@ export class WishListUpdateComponent implements OnInit {
       id: wishList.id,
       title: wishList.title,
       restricted: wishList.restricted,
-      customer: wishList.customer,
+      product: wishList.product,
     });
 
-    this.customersSharedCollection = this.customerService.addCustomerToCollectionIfMissing(
-      this.customersSharedCollection,
-      wishList.customer
-    );
+    this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(this.productsSharedCollection, wishList.product);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.customerService
+    this.productService
       .query()
-      .pipe(map((res: HttpResponse<ICustomer[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
       .pipe(
-        map((customers: ICustomer[]) =>
-          this.customerService.addCustomerToCollectionIfMissing(customers, this.editForm.get('customer')!.value)
-        )
+        map((products: IProduct[]) => this.productService.addProductToCollectionIfMissing(products, this.editForm.get('product')!.value))
       )
-      .subscribe((customers: ICustomer[]) => (this.customersSharedCollection = customers));
+      .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
   }
 
   protected createFromForm(): IWishList {
@@ -110,7 +105,7 @@ export class WishListUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
       restricted: this.editForm.get(['restricted'])!.value,
-      customer: this.editForm.get(['customer'])!.value,
+      product: this.editForm.get(['product'])!.value,
     };
   }
 }

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mycompany.myapp.domain.enumeration.CategoryStatus;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -46,19 +44,9 @@ public class Category implements Serializable {
     @Column(name = "status")
     private CategoryStatus status;
 
-    @OneToMany(mappedBy = "category")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "wishList", "category" }, allowSetters = true)
-    private Set<Product> welcomes = new HashSet<>();
-
-    @OneToMany(mappedBy = "category")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "welcomes", "welcomes", "category" }, allowSetters = true)
-    private Set<Category> welcomes = new HashSet<>();
-
     @ManyToOne
-    @JsonIgnoreProperties(value = { "welcomes", "welcomes", "category" }, allowSetters = true)
-    private Category category;
+    @JsonIgnoreProperties(value = { "wishLists", "categories" }, allowSetters = true)
+    private Product product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -152,79 +140,17 @@ public class Category implements Serializable {
         this.status = status;
     }
 
-    public Set<Product> getWelcomes() {
-        return this.welcomes;
+    public Product getProduct() {
+        return this.product;
     }
 
-    public Category welcomes(Set<Product> products) {
-        this.setWelcomes(products);
+    public Category product(Product product) {
+        this.setProduct(product);
         return this;
     }
 
-    public Category addWelcome(Product product) {
-        this.welcomes.add(product);
-        product.setCategory(this);
-        return this;
-    }
-
-    public Category removeWelcome(Product product) {
-        this.welcomes.remove(product);
-        product.setCategory(null);
-        return this;
-    }
-
-    public void setWelcomes(Set<Product> products) {
-        if (this.welcomes != null) {
-            this.welcomes.forEach(i -> i.setCategory(null));
-        }
-        if (products != null) {
-            products.forEach(i -> i.setCategory(this));
-        }
-        this.welcomes = products;
-    }
-
-    public Set<Category> getWelcomes() {
-        return this.welcomes;
-    }
-
-    public Category welcomes(Set<Category> categories) {
-        this.setWelcomes(categories);
-        return this;
-    }
-
-    public Category addWelcome(Category category) {
-        this.welcomes.add(category);
-        category.setCategory(this);
-        return this;
-    }
-
-    public Category removeWelcome(Category category) {
-        this.welcomes.remove(category);
-        category.setCategory(null);
-        return this;
-    }
-
-    public void setWelcomes(Set<Category> categories) {
-        if (this.welcomes != null) {
-            this.welcomes.forEach(i -> i.setCategory(null));
-        }
-        if (categories != null) {
-            categories.forEach(i -> i.setCategory(this));
-        }
-        this.welcomes = categories;
-    }
-
-    public Category getCategory() {
-        return this.category;
-    }
-
-    public Category category(Category category) {
-        this.setCategory(category);
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

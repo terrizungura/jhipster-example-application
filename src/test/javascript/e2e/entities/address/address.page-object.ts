@@ -36,8 +36,6 @@ export class AddressUpdatePage {
   postcodeInput = element(by.id('field_postcode'));
   coutnryInput = element(by.id('field_coutnry'));
 
-  customerSelect = element(by.id('field_customer'));
-
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
@@ -88,22 +86,6 @@ export class AddressUpdatePage {
 
   async getCoutnryInput(): Promise<string> {
     return await this.coutnryInput.getAttribute('value');
-  }
-
-  async customerSelectLastOption(): Promise<void> {
-    await this.customerSelect.all(by.tagName('option')).last().click();
-  }
-
-  async customerSelectOption(option: string): Promise<void> {
-    await this.customerSelect.sendKeys(option);
-  }
-
-  getCustomerSelect(): ElementFinder {
-    return this.customerSelect;
-  }
-
-  async getCustomerSelectedOption(): Promise<string> {
-    return await this.customerSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

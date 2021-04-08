@@ -42,7 +42,7 @@ describe('WishList e2e test', () => {
 
     await wishListComponentsPage.clickOnCreateButton();
 
-    await promise.all([wishListUpdatePage.setTitleInput('title'), wishListUpdatePage.customerSelectLastOption()]);
+    await promise.all([wishListUpdatePage.setTitleInput('title'), wishListUpdatePage.productSelectLastOption()]);
 
     expect(await wishListUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
     const selectedRestricted = wishListUpdatePage.getRestrictedInput();

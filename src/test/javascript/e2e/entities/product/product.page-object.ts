@@ -37,9 +37,6 @@ export class ProductUpdatePage {
   dateAddedInput = element(by.id('field_dateAdded'));
   dateModifiedInput = element(by.id('field_dateModified'));
 
-  wishListSelect = element(by.id('field_wishList'));
-  categorySelect = element(by.id('field_category'));
-
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
@@ -98,38 +95,6 @@ export class ProductUpdatePage {
 
   async getDateModifiedInput(): Promise<string> {
     return await this.dateModifiedInput.getAttribute('value');
-  }
-
-  async wishListSelectLastOption(): Promise<void> {
-    await this.wishListSelect.all(by.tagName('option')).last().click();
-  }
-
-  async wishListSelectOption(option: string): Promise<void> {
-    await this.wishListSelect.sendKeys(option);
-  }
-
-  getWishListSelect(): ElementFinder {
-    return this.wishListSelect;
-  }
-
-  async getWishListSelectedOption(): Promise<string> {
-    return await this.wishListSelect.element(by.css('option:checked')).getText();
-  }
-
-  async categorySelectLastOption(): Promise<void> {
-    await this.categorySelect.all(by.tagName('option')).last().click();
-  }
-
-  async categorySelectOption(option: string): Promise<void> {
-    await this.categorySelect.sendKeys(option);
-  }
-
-  getCategorySelect(): ElementFinder {
-    return this.categorySelect;
-  }
-
-  async getCategorySelectedOption(): Promise<string> {
-    return await this.categorySelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

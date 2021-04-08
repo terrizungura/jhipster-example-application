@@ -10,8 +10,8 @@ export interface IProduct {
   rating?: number | null;
   dateAdded?: dayjs.Dayjs | null;
   dateModified?: dayjs.Dayjs | null;
-  wishList?: IWishList | null;
-  category?: ICategory | null;
+  wishLists?: IWishList[] | null;
+  categories?: ICategory[] | null;
 }
 
 export class Product implements IProduct {
@@ -23,8 +23,8 @@ export class Product implements IProduct {
     public rating?: number | null,
     public dateAdded?: dayjs.Dayjs | null,
     public dateModified?: dayjs.Dayjs | null,
-    public wishList?: IWishList | null,
-    public category?: ICategory | null
+    public wishLists?: IWishList[] | null,
+    public categories?: ICategory[] | null
   ) {}
 }
 

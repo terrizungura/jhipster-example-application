@@ -7,7 +7,7 @@ export interface IAddress {
   city?: string | null;
   postcode?: string | null;
   coutnry?: string | null;
-  customer?: ICustomer | null;
+  customers?: ICustomer[] | null;
 }
 
 export class Address implements IAddress {
@@ -18,7 +18,7 @@ export class Address implements IAddress {
     public city?: string | null,
     public postcode?: string | null,
     public coutnry?: string | null,
-    public customer?: ICustomer | null
+    public customers?: ICustomer[] | null
   ) {}
 }
 

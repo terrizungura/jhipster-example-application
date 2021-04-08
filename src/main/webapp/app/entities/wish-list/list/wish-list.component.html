@@ -35,7 +35,7 @@
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.wishList.title">Title</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.wishList.restricted">Restricted</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.wishList.customer">Customer</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.wishList.product">Product</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,8 +47,8 @@
           <td>{{ wishList.title }}</td>
           <td>{{ wishList.restricted }}</td>
           <td>
-            <div *ngIf="wishList.customer">
-              <a [routerLink]="['/customer', wishList.customer?.id, 'view']">{{ wishList.customer?.id }}</a>
+            <div *ngIf="wishList.product">
+              <a [routerLink]="['/product', wishList.product?.id, 'view']">{{ wishList.product?.id }}</a>
             </div>
           </td>
           <td class="text-right">

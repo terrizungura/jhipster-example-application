@@ -7,6 +7,8 @@ import { finalize, map } from 'rxjs/operators';
 
 import { ICategory, Category } from '../category.model';
 import { CategoryService } from '../service/category.service';
+import { IProduct } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
 
 @Component({
   selector: 'jhi-category-update',
@@ -15,7 +17,7 @@ import { CategoryService } from '../service/category.service';
 export class CategoryUpdateComponent implements OnInit {
   isSaving = false;
 
-  categoriesSharedCollection: ICategory[] = [];
+  productsSharedCollection: IProduct[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -25,10 +27,15 @@ export class CategoryUpdateComponent implements OnInit {
     dateAdded: [],
     dateModified: [],
     status: [],
-    category: [],
+    product: [],
   });
 
-  constructor(protected categoryService: CategoryService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected categoryService: CategoryService,
+    protected productService: ProductService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ category }) => {
@@ -52,7 +59,7 @@ export class CategoryUpdateComponent implements OnInit {
     }
   }
 
-  trackCategoryById(index: number, item: ICategory): number {
+  trackProductById(index: number, item: IProduct): number {
     return item.id!;
   }
 
@@ -84,25 +91,20 @@ export class CategoryUpdateComponent implements OnInit {
       dateAdded: category.dateAdded,
       dateModified: category.dateModified,
       status: category.status,
-      category: category.category,
+      product: category.product,
     });
 
-    this.categoriesSharedCollection = this.categoryService.addCategoryToCollectionIfMissing(
-      this.categoriesSharedCollection,
-      category.category
-    );
+    this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(this.productsSharedCollection, category.product);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.categoryService
+    this.productService
       .query()
-      .pipe(map((res: HttpResponse<ICategory[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
       .pipe(
-        map((categories: ICategory[]) =>
-          this.categoryService.addCategoryToCollectionIfMissing(categories, this.editForm.get('category')!.value)
-        )
+        map((products: IProduct[]) => this.productService.addProductToCollectionIfMissing(products, this.editForm.get('product')!.value))
       )
-      .subscribe((categories: ICategory[]) => (this.categoriesSharedCollection = categories));
+      .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
   }
 
   protected createFromForm(): ICategory {
@@ -115,7 +117,7 @@ export class CategoryUpdateComponent implements OnInit {
       dateAdded: this.editForm.get(['dateAdded'])!.value,
       dateModified: this.editForm.get(['dateModified'])!.value,
       status: this.editForm.get(['status'])!.value,
-      category: this.editForm.get(['category'])!.value,
+      product: this.editForm.get(['product'])!.value,
     };
   }
 }

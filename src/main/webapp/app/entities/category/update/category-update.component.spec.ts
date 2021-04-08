@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { CategoryService } from '../service/category.service';
 import { ICategory, Category } from '../category.model';
+import { IProduct } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
 
 import { CategoryUpdateComponent } from './category-update.component';
 
@@ -18,6 +20,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<CategoryUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let categoryService: CategoryService;
+    let productService: ProductService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -31,40 +34,41 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(CategoryUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       categoryService = TestBed.inject(CategoryService);
+      productService = TestBed.inject(ProductService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Category query and add missing value', () => {
+      it('Should call Product query and add missing value', () => {
         const category: ICategory = { id: 456 };
-        const category: ICategory = { id: 96124 };
-        category.category = category;
+        const product: IProduct = { id: 85001 };
+        category.product = product;
 
-        const categoryCollection: ICategory[] = [{ id: 18566 }];
-        spyOn(categoryService, 'query').and.returnValue(of(new HttpResponse({ body: categoryCollection })));
-        const additionalCategories = [category];
-        const expectedCollection: ICategory[] = [...additionalCategories, ...categoryCollection];
-        spyOn(categoryService, 'addCategoryToCollectionIfMissing').and.returnValue(expectedCollection);
+        const productCollection: IProduct[] = [{ id: 10899 }];
+        spyOn(productService, 'query').and.returnValue(of(new HttpResponse({ body: productCollection })));
+        const additionalProducts = [product];
+        const expectedCollection: IProduct[] = [...additionalProducts, ...productCollection];
+        spyOn(productService, 'addProductToCollectionIfMissing').and.returnValue(expectedCollection);
 
         activatedRoute.data = of({ category });
         comp.ngOnInit();
 
-        expect(categoryService.query).toHaveBeenCalled();
-        expect(categoryService.addCategoryToCollectionIfMissing).toHaveBeenCalledWith(categoryCollection, ...additionalCategories);
-        expect(comp.categoriesSharedCollection).toEqual(expectedCollection);
+        expect(productService.query).toHaveBeenCalled();
+        expect(productService.addProductToCollectionIfMissing).toHaveBeenCalledWith(productCollection, ...additionalProducts);
+        expect(comp.productsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
         const category: ICategory = { id: 456 };
-        const category: ICategory = { id: 95574 };
-        category.category = category;
+        const product: IProduct = { id: 41751 };
+        category.product = product;
 
         activatedRoute.data = of({ category });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(category));
-        expect(comp.categoriesSharedCollection).toContain(category);
+        expect(comp.productsSharedCollection).toContain(product);
       });
     });
 
@@ -133,10 +137,10 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
-      describe('trackCategoryById', () => {
-        it('Should return tracked Category primary key', () => {
+      describe('trackProductById', () => {
+        it('Should return tracked Product primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackCategoryById(0, entity);
+          const trackResult = comp.trackProductById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

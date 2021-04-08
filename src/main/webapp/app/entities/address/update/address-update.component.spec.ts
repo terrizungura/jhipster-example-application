@@ -9,8 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { AddressService } from '../service/address.service';
 import { IAddress, Address } from '../address.model';
-import { ICustomer } from 'app/entities/customer/customer.model';
-import { CustomerService } from 'app/entities/customer/service/customer.service';
 
 import { AddressUpdateComponent } from './address-update.component';
 
@@ -20,7 +18,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<AddressUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let addressService: AddressService;
-    let customerService: CustomerService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +31,18 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(AddressUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       addressService = TestBed.inject(AddressService);
-      customerService = TestBed.inject(CustomerService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Customer query and add missing value', () => {
-        const address: IAddress = { id: 456 };
-        const customer: ICustomer = { id: 59999 };
-        address.customer = customer;
-
-        const customerCollection: ICustomer[] = [{ id: 29058 }];
-        spyOn(customerService, 'query').and.returnValue(of(new HttpResponse({ body: customerCollection })));
-        const additionalCustomers = [customer];
-        const expectedCollection: ICustomer[] = [...additionalCustomers, ...customerCollection];
-        spyOn(customerService, 'addCustomerToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ address });
-        comp.ngOnInit();
-
-        expect(customerService.query).toHaveBeenCalled();
-        expect(customerService.addCustomerToCollectionIfMissing).toHaveBeenCalledWith(customerCollection, ...additionalCustomers);
-        expect(comp.customersSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const address: IAddress = { id: 456 };
-        const customer: ICustomer = { id: 45363 };
-        address.customer = customer;
 
         activatedRoute.data = of({ address });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(address));
-        expect(comp.customersSharedCollection).toContain(customer);
       });
     });
 
@@ -133,16 +107,6 @@ describe('Component Tests', () => {
         expect(addressService.update).toHaveBeenCalledWith(address);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Tracking relationships identifiers', () => {
-      describe('trackCustomerById', () => {
-        it('Should return tracked Customer primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackCustomerById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
       });
     });
   });

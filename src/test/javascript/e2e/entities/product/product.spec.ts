@@ -49,8 +49,6 @@ describe('Product e2e test', () => {
       productUpdatePage.setRatingInput('5'),
       productUpdatePage.setDateAddedInput('2000-12-31'),
       productUpdatePage.setDateModifiedInput('2000-12-31'),
-      productUpdatePage.wishListSelectLastOption(),
-      productUpdatePage.categorySelectLastOption(),
     ]);
 
     expect(await productUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');

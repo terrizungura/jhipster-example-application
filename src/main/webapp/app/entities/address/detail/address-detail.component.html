@@ -34,12 +34,6 @@
         <dd>
           <span>{{ address.coutnry }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterSampleApplicationApp.address.customer">Customer</span></dt>
-        <dd>
-          <div *ngIf="address.customer">
-            <a [routerLink]="['/customer', address.customer?.id, 'view']">{{ address.customer?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

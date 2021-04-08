@@ -20,16 +20,16 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "address",
       "otherEntityRelationshipName": "customer",
-      "relationshipName": "firstName"
+      "relationshipName": "address"
     },
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "wishList",
       "otherEntityRelationshipName": "customer",
-      "relationshipName": "firstName"
+      "relationshipName": "wishList"
     }
   ],
   "entityTableName": "customer",

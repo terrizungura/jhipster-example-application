@@ -37,7 +37,7 @@ export class CategoryUpdatePage {
   dateModifiedInput = element(by.id('field_dateModified'));
   statusSelect = element(by.id('field_status'));
 
-  categorySelect = element(by.id('field_category'));
+  productSelect = element(by.id('field_product'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -103,20 +103,20 @@ export class CategoryUpdatePage {
     await this.statusSelect.all(by.tagName('option')).last().click();
   }
 
-  async categorySelectLastOption(): Promise<void> {
-    await this.categorySelect.all(by.tagName('option')).last().click();
+  async productSelectLastOption(): Promise<void> {
+    await this.productSelect.all(by.tagName('option')).last().click();
   }
 
-  async categorySelectOption(option: string): Promise<void> {
-    await this.categorySelect.sendKeys(option);
+  async productSelectOption(option: string): Promise<void> {
+    await this.productSelect.sendKeys(option);
   }
 
-  getCategorySelect(): ElementFinder {
-    return this.categorySelect;
+  getProductSelect(): ElementFinder {
+    return this.productSelect;
   }
 
-  async getCategorySelectedOption(): Promise<string> {
-    return await this.categorySelect.element(by.css('option:checked')).getText();
+  async getProductSelectedOption(): Promise<string> {
+    return await this.productSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

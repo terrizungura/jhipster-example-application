@@ -37,16 +37,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.wishList.customer" for="field_customer"
-            >Customer</label
-          >
-          <select class="form-control" id="field_customer" data-cy="customer" name="customer" formControlName="customer">
+          <label class="form-control-label" jhiTranslate="jhipsterSampleApplicationApp.wishList.product" for="field_product">Product</label>
+          <select class="form-control" id="field_product" data-cy="product" name="product" formControlName="product">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
-              *ngFor="let customerOption of customersSharedCollection; trackBy: trackCustomerById"
+              [ngValue]="productOption.id === editForm.get('product')!.value?.id ? editForm.get('product')!.value : productOption"
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
             >
-              {{ customerOption.id }}
+              {{ productOption.id }}
             </option>
           </select>
         </div>

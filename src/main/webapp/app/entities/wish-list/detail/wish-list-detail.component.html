@@ -22,10 +22,10 @@
         <dd>
           <span>{{ wishList.restricted }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterSampleApplicationApp.wishList.customer">Customer</span></dt>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.wishList.product">Product</span></dt>
         <dd>
-          <div *ngIf="wishList.customer">
-            <a [routerLink]="['/customer', wishList.customer?.id, 'view']">{{ wishList.customer?.id }}</a>
+          <div *ngIf="wishList.product">
+            <a [routerLink]="['/product', wishList.product?.id, 'view']">{{ wishList.product?.id }}</a>
           </div>
         </dd>
       </dl>

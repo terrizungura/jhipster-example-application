@@ -24,9 +24,7 @@
       "dateAdded": "Date Added",
       "dateModified": "Date Modified",
       "status": "Status",
-      "welcome": "Welcome",
-      "welcome": "Welcome",
-      "category": "Category"
+      "product": "Product"
     }
   }
 }

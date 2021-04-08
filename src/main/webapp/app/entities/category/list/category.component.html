@@ -39,7 +39,7 @@
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.category.dateAdded">Date Added</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.category.dateModified">Date Modified</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.category.status">Status</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.category.category">Category</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.category.product">Product</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -55,8 +55,8 @@
           <td>{{ category.dateModified | formatMediumDate }}</td>
           <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.CategoryStatus.' + category.status }}">{{ category.status }}</td>
           <td>
-            <div *ngIf="category.category">
-              <a [routerLink]="['/category', category.category?.id, 'view']">{{ category.category?.id }}</a>
+            <div *ngIf="category.product">
+              <a [routerLink]="['/product', category.product?.id, 'view']">{{ category.product?.id }}</a>
             </div>
           </td>
           <td class="text-right">

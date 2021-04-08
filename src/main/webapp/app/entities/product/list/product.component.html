@@ -39,8 +39,6 @@
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.product.rating">Rating</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.product.dateAdded">Date Added</span></th>
           <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.product.dateModified">Date Modified</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.product.wishList">Wish List</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterSampleApplicationApp.product.category">Category</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -55,16 +53,6 @@
           <td>{{ product.rating }}</td>
           <td>{{ product.dateAdded | formatMediumDate }}</td>
           <td>{{ product.dateModified | formatMediumDate }}</td>
-          <td>
-            <div *ngIf="product.wishList">
-              <a [routerLink]="['/wish-list', product.wishList?.id, 'view']">{{ product.wishList?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="product.category">
-              <a [routerLink]="['/category', product.category?.id, 'view']">{{ product.category?.id }}</a>
-            </div>
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button
