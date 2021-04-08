@@ -42,7 +42,9 @@
     "jwtSecretKey": "M2IzNzQ4YmZkZDYwNmQ0MDI0NzM1ZmM5ODlkZTBiNjdiNzQ0ZjdmNTM2MDQ5ZDRkZTI1ODNiY2VmYjlhZDExY2Q5MDhlZWM3ZDRjOTIzZTZmYTQxZGRhMDM4ODVmODA3MGYwNjcwYTMwOTJiZmI3NzFkYTQ5NzBkNWQ0MDYyZGI=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Category", "Product", "WishList", "Customer", "Address"],
+    "lastLiquibaseTimestamp": 1617889271000
   },
   "git-provider": "GitHub",
   "git-company": "terrizungura",
