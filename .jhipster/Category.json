@@ -1,0 +1,62 @@
+{
+  "name": "Category",
+  "fields": [
+    {
+      "fieldName": "welcome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sortOrder",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateAdded",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "CategoryStatus",
+      "fieldValues": "AVAILABLE,RESTRICTED,DISABLED"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "welcome"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "welcome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "welcome",
+      "relationshipName": "category"
+    }
+  ],
+  "entityTableName": "category",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210408134107"
+}
